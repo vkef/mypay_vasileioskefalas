@@ -24,6 +24,19 @@ export const ProductPermissionSchema = z.enum([
 ]);
 
 
+export const CustomerPermissionSchema = z.enum([
+  'READ',
+  'UPDATE',
+  'DELETE',
+  'KYC',
+  'ISSUE_DEBIT_CARD',
+  'ISSUE_PREPAID_CARD',
+  'ENABLE',
+  'CONFIG',
+  'DEAL',
+]);
+
+
 export const UserPermissionSchema = z.enum([
   'READ',
   'UPDATE_INFO',
