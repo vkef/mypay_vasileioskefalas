@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { getUserPermissions } from './permissions.service';
 
 export async function getPermissionsHandler(
   req: Request,
@@ -7,11 +8,9 @@ export async function getPermissionsHandler(
 ): Promise<void> {
   try {
     const { user_id } = req.params;
+    const permissions = await getUserPermissions(user_id);
 
-    res.status(501).json({
-      error: 'Permission retrieval is not implemented yet',
-      user_id,
-    });
+    res.status(200).json(permissions);
   } catch (err) {
     next(err);
   }
