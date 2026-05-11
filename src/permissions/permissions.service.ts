@@ -1,5 +1,6 @@
 import pool from '../db/pool';
-import { fetchPermissions, UserPermissions } from './permissions.repository';
+import { fetchPermissions, replacePermissions, UserPermissions } from './permissions.repository';
+import { PermissionsBody } from './permissions.schema';
 
 export class NotFoundError extends Error {
   constructor(message: string) {
@@ -23,5 +24,13 @@ async function assertUserExists(userId: string): Promise<void> {
 
 export async function getUserPermissions(userId: string): Promise<UserPermissions> {
   await assertUserExists(userId);
+  // Re-fetch from the DB
+  return fetchPermissions(userId);
+}
+
+export async function replaceUserPermissions(userId: string, body: PermissionsBody): Promise<UserPermissions> {
+  await assertUserExists(userId);
+  await replacePermissions(userId, body);
+  // Re-fetch from the DB
   return fetchPermissions(userId);
 }

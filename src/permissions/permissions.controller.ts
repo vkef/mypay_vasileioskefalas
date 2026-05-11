@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
-import { getUserPermissions } from './permissions.service';
+import { PermissionsBodySchema } from './permissions.schema';
+import { getUserPermissions, replaceUserPermissions } from './permissions.service';
 
 // GET 
 export async function getPermissionsHandler(
