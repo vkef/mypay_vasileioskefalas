@@ -26,11 +26,17 @@ export async function updatePermissionsHandler(
 ): Promise<void> {
   try {
     const { user_id } = req.params;
+    const parsed = PermissionsBodySchema.safeParse(req.body);
 
-    res.status(501).json({
-      error: 'Permission update is not implemented yet',
-      user_id,
-    });
+    if (!parsed.success) {
+      res.status(400).json({
+        error: 'Invalid request body',
+      });
+      return;
+    }
+
+    const permissions = await replaceUserPermissions(user_id, parsed.data);
+    res.status(200).json(permissions);
   } catch (err) {
     next(err);
   }
