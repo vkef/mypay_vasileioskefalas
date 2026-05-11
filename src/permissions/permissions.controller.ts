@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { getUserPermissions } from './permissions.service';
 
+// GET 
 export async function getPermissionsHandler(
   req: Request,
   res: Response,
@@ -16,6 +17,7 @@ export async function getPermissionsHandler(
   }
 }
 
+// PUT 
 export async function updatePermissionsHandler(
   req: Request,
   res: Response,
