@@ -14,28 +14,28 @@ export async function fetchPermissions(userId: string): Promise<UserPermissions>
 
   try {
     const toCreate = await client.query(
-      `SELECT subsystem_id, permission
+      `SELECT subsystem_id, permission::text[] AS permission
        FROM public.permissions_to_create
        WHERE user_account_id = $1`,
       [userId]
     );
 
     const onBankAccount = await client.query(
-      `SELECT bank_account_id, subsystem_id, permission, customer_id
+      `SELECT bank_account_id, subsystem_id, permission::text[] AS permission, customer_id
        FROM public.permissions_on_bank_account
        WHERE user_account_id = $1`,
       [userId]
     );
 
     const onCustomer = await client.query(
-      `SELECT subsystem_id, permission, customer_id
+      `SELECT subsystem_id, permission::text[] AS permission, customer_id
        FROM public.permissions_on_customer
        WHERE user_account_id = $1`,
       [userId]
     );
 
     const onUser = await client.query(
-      `SELECT subsystem_id, permission
+      `SELECT subsystem_id, permission::text[] AS permission
        FROM public.permissions_on_user
        WHERE user_account_id = $1`,
       [userId]
