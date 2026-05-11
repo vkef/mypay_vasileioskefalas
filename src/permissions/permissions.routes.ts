@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { requireApiKey } from '../middleware/authMiddleware';
 import {
   getPermissionsHandler,
   updatePermissionsHandler,
@@ -6,7 +7,7 @@ import {
 
 const router = Router();
 
-router.get('/api/users/permissions/:user_id', getPermissionsHandler);
-router.put('/api/users/permissions/:user_id', updatePermissionsHandler);
+router.get('/api/users/permissions/:user_id', requireApiKey, getPermissionsHandler);
+router.put('/api/users/permissions/:user_id', requireApiKey, updatePermissionsHandler);
 
 export default router;
