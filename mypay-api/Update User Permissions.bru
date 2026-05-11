@@ -1,0 +1,51 @@
+meta {
+  name: Update User Permissions
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3000/api/users/permissions/user-001
+  body: json
+}
+
+headers {
+  Content-Type: application/json
+  x-api-key: {{apiKey}}
+}
+
+body:json {
+  {
+    "permissions_to_create": [
+      {
+        "subsystem_id": "web-app",
+        "permission": ["Customer", "Deal"]
+      }
+    ],
+    "permissions_on_bank_account": [
+      {
+        "bank_account_id": "550e8400-e29b-41d4-a716-446655440000",
+        "subsystem_id": "web-app",
+        "permission": ["READ", "BALANCE"],
+        "customer_id": "550e8400-e29b-41d4-a716-446655440001"
+      }
+    ],
+    "permissions_on_customer": [
+      {
+        "subsystem_id": "web-app",
+        "permission": ["READ", "UPDATE"],
+        "customer_id": "550e8400-e29b-41d4-a716-446655440001"
+      }
+    ],
+    "permissions_on_user": [
+      {
+        "subsystem_id": "web-app",
+        "permission": ["READ"]
+      }
+    ]
+  }
+}
+
+settings {
+  encodeUrl: true
+}

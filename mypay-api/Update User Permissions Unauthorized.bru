@@ -1,0 +1,29 @@
+meta {
+  name: Update User Permissions Unauthorized
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:3000/api/users/permissions/user-001
+  body: json
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "permissions_on_user": [
+      {
+        "subsystem_id": "web-app",
+        "permission": ["READ"]
+      }
+    ]
+  }
+}
+
+settings {
+  encodeUrl: true
+}
